@@ -1,0 +1,44 @@
+{
+    "groups": [{
+        "key": "base",
+        "name": "Basic settings",
+        "groups": [{
+                "key": "image_dir",
+                "name": "Select directory",
+                "options": [{
+                        "key": "select_work_dir",
+                        "name": "select dir",
+                        "type": "selectDir",
+                        "default": "/home"
+                    }
+                ]
+            },
+            {
+                "key": "rotate_settings",
+                "name": "Rotate settings",
+                "options": [{
+                        "key": "enable_rotate",
+                        "text": "Enable rotate",
+                        "type": "checkbox",
+                        "default": "true"
+                    },
+                    {
+                        "key": "rotate_mode",
+                        "name": "  ",
+                        "type": "radiogroup",
+                        "items": ["Positive sequence","Reverse order", "Random"],
+                        "default": 0
+                    },
+                    {
+                        "key": "rotate_time",
+                        "name": "Rotate time(s)",
+                        "type": "spinbutton",
+                        "default": 30,
+                        "max": 3600,
+                        "min": 1
+                    }
+                ]
+            }
+        ]
+    }]
+}
