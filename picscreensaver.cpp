@@ -71,7 +71,6 @@ PicScreenSaver::PicScreenSaver(bool subWindow, QWidget *parent)
         connect(m_timer.get(), &QTimer::timeout, this, &PicScreenSaver::onUpdateImage);
 
         m_timer->setInterval(m_intervalTime*1000);
-        m_timer->start();
     }
 }
 
@@ -87,6 +86,9 @@ void PicScreenSaver::playScreenSaver()
     m_play = true;
 
     show();
+
+    if (m_interval)
+        m_timer->start();
 }
 
 void PicScreenSaver::onUpdateImage()
@@ -147,8 +149,6 @@ void PicScreenSaver::paintEvent(QPaintEvent *event)
                                  trueSize.width(),
                                  trueSize.height()));
         }
-
-
 
         QPainter pa(this);
         pa.drawPixmap(event->rect().topLeft(), pix, QRectF(QPointF(event->rect().topLeft()) * scale, QSizeF(event->rect().size()) * scale));

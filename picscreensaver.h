@@ -18,8 +18,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef PIXSCREENSAVER_H
-#define PIXSCREENSAVER_H
+#ifndef PICSCREENSAVER_H
+#define PICSCREENSAVER_H
 
 #include <QWidget>
 #include <QPixmap>
@@ -63,4 +63,4 @@ private:
     QMimeDatabase m_mimeDataBase;
 };
 
-#endif // PIXSCREENSAVER_H
+#endif // PICSCREENSAVER_H
