@@ -1,0 +1,15 @@
+Source: deepin-image-screensaver
+Section: utils
+Priority: optional
+Maintainer: Deepin Packages Builder <packages@deepin.com>
+Build-Depends: debhelper (>= 9),
+ pkg-config,
+ qt5-qmake,
+ qtbase5-dev,
+Standards-Version: 3.9.8
+Homepage: http://www.deepin.org/
+
+Package: deepin-image-screensaver
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: image screen saver
