@@ -22,6 +22,8 @@
 
 #include <QApplication>
 #include <QStandardPaths>
+#include <QDir>
+#include <QFileInfo>
 
 static const char *const kGroupWorkPath = "base.image_dir.select_work_dir";
 static const char *const kGroupEnableRotate = "base.rotate_settings.enable_rotate";
@@ -121,10 +123,31 @@ QString PicScreenSaverConfig::path() const
 
     QString configPath = configPaths.first();
     configPath = configPath
-            + "/" + QApplication::organizationName()
-            + "/" + kDeepinScreenSaver
-            + "/" + QApplication::applicationName()
-            + "/" + QApplication::applicationName() + ".conf";
+                 + "/" + QApplication::organizationName()
+                 + "/" + kDeepinScreenSaver + "/"
+                 + QApplication::applicationName()
+                 + "/" + QApplication::applicationName() + ".conf";
+
+    QFileInfo confFile(configPath);
+
+    // 本地配置文件不存在
+    if (!confFile.exists()) {
+
+        QDir confDir = confFile.absoluteDir();
+        if (!confDir.exists())
+            confDir.mkpath(confDir.absolutePath());
+
+        // 系统配置文件存在，则拷贝。否则不做处理，后面设置值时会自动创建
+        QString pathGeneral("/etc");
+        pathGeneral = pathGeneral
+                      + "/" + kDeepinScreenSaver
+                      + "/" + QApplication::applicationName()
+                      + "/" + QApplication::applicationName() + ".conf";
+        QFile confGeneralFile(pathGeneral);
+        if (confGeneralFile.exists()) {
+            confGeneralFile.copy(configPath);
+        }
+    }
 
     return configPath;
 }

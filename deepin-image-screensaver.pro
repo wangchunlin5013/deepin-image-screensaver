@@ -40,10 +40,16 @@ DTK_SETTINGS = $${QT.dtkcore.tools}/dtk-settings
 system($$DTK_SETTINGS -o deepin-image-screensaver_translation.cpp $$PWD/deepin-image-screensaver.json)
 system(lupdate ./deepin-image-screensaver_translation.cpp -ts $${TARGET}_zh_CN.ts)
 
-target.path = ~/.config/deepin/deepin-screensaver/$${TARGET}/
+target.path = /usr/lib/deepin-screensaver/modules/
 
 translations.path = /usr/share/$${TARGET}/translations
 translations.files = translations/*.qm
 
-INSTALLS += target translations
+json.path = /etc/deepin-screensaver/$${TARGET}/
+json.files = $${TARGET}.json
+
+conf.path = /etc/deepin-screensaver/$${TARGET}/
+conf.files = $${TARGET}.conf
+
+INSTALLS += target translations json conf
 

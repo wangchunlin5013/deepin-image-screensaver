@@ -45,7 +45,6 @@ PicScreenSaver::PicScreenSaver(bool subWindow, QWidget *parent)
     QFileInfoList infoList = dir.entryInfoList(filters);
     if (infoList.isEmpty()) {
         qWarning()<<"Error:no image file!";
-        return;
     }
 
     for (auto info : infoList) {
