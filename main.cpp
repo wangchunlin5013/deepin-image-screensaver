@@ -29,6 +29,8 @@
 #include <QScreen>
 #include <QStringList>
 
+#include <X11/Xlib.h>
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -52,9 +54,18 @@ int main(int argc, char *argv[])
         w.setProperty("_q_embedded_native_parent_handle",QVariant(windowHwnd));
         w.winId();
         w.windowHandle()->setParent(window);
-        QRect wRect = window->screen()->geometry();
-        w.setGeometry(QRect(0, 0, wRect.width(), wRect.height()));
 
+        Display *display = XOpenDisplay(nullptr);
+        if (!display) {
+            qWarning() << "can not connect xservice.";
+            return -1;
+        }
+
+        Window windowXID(windowHwnd);
+        XWindowAttributes attr;
+        XGetWindowAttributes(display, windowXID, &attr);
+
+        w.setGeometry(QRect(0, 0, attr.width, attr.height));
         w.playScreenSaver();
 
         return a.exec();
